@@ -20,7 +20,7 @@ Run migrations and seed data with
 Start the server with <npm start>.
 
 
-Backend APIs will be accessible at http://localhost:
+Backend APIs will be accessible at [https://capstoneapi-bifb.onrender.com]
 API Endpoints 📡
 GET /events: Retrieve a list of events in the user's area.
 POST /events: Create a new event.
