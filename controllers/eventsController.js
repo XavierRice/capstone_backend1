@@ -12,7 +12,8 @@ const { getEvents,
 
 events.get('/', async (req, res) => {
     try {
-        const events = await getEvents()
+        const { user_id } = req.params
+        const events = await getEvents(user_id)
         res.status(200).json({ data: events })
     } catch (error) {
             res.status(500).json({ error: "Internal Server Error" })
@@ -23,8 +24,8 @@ events.get('/', async (req, res) => {
 // get one event
 events.get('/:id', async (req, res) => {
     try {
-        const { id } = req.params
-        const event = await getEvents( id )
+        const { id, user_id } = req.params
+        const event = await getEvents( id, user_id )
         res.status(200).json(event)
     } catch (err) {
         res.status(404).json({ error: err })
