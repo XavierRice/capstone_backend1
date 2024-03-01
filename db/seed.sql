@@ -8,9 +8,9 @@ VALUES
 
 INSERT INTO events (user_id, event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvp)
 VALUES
-(1, 'Climate Change Awareness Rally', '2023-04-22', '12:00:00', 40.7128, -74.0060, 'Central Park, New York', 'Join us for a rally to raise awareness about climate change and its impact on our planet.', 'https://example.com/event_photo1.jpg', false, 1, 12345, true),
-(2, 'Community Cleanup Day', '2023-05-15', '09:00:00', 40.6782, -73.9442, 'Brooklyn Bridge Park, Brooklyn', 'Help keep our community clean by participating in our annual cleanup day.', 'https://example.com/event_photo2.jpg', false, 2, 67890, true),
-(3, 'Voter Registration Drive', '2023-06-30', '10:00:00', 40.7306, -73.9352, 'Union Square, New York', 'Join us to register voters and promote civic engagement in our community.', 'https://example.com/event_photo3.jpg', true, 3, 24680, true);
+(1, 'Climate Change Awareness Rally', '2023-04-22', '12:00:00', 40.7128, -74.0060, 'Central Park, New York', 'Join us for a rally to raise awareness about climate change and its impact on our planet.', 'https://example.com/event_photo1.jpg', false, 1, 12345, false),
+(2, 'Community Cleanup Day', '2023-05-15', '09:00:00', 40.6782, -73.9442, 'Brooklyn Bridge Park, Brooklyn', 'Help keep our community clean by participating in our annual cleanup day.', 'https://example.com/event_photo2.jpg', false, 2, 67890, false),
+(3, 'Voter Registration Drive', '2023-06-30', '10:00:00', 40.7306, -73.9352, 'Union Square, New York', 'Join us to register voters and promote civic engagement in our community.', 'https://example.com/event_photo3.jpg', true, 3, 24680, false);
 
 
 INSERT INTO news (user_id, news_title, donation_id, news_content, news_url, news_image)

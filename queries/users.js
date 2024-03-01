@@ -12,7 +12,17 @@ const getUser = async () => {
 
     const createUser = async(user) => {
         try {
-            const { user_id, first_name, last_name, user_name, email, events_created, favorite_events, favorite_news, donations_made, password_hash, user_keywords } = user
+            const { user_id, 
+                    first_name, 
+                    last_name, 
+                    user_name, 
+                    email, 
+                    events_created, 
+                    favorite_events, 
+                    favorite_news, 
+                    donations_made, 
+                    password_hash, 
+                    user_keywords } = user
             const salt = 10;
             const hash = await bcrypt.hash(password_hash, salt);
             const newUser = await db.one(

@@ -20,7 +20,7 @@ CREATE TABLE users (
 
 CREATE TABLE events (
   event_id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(user_id),
+  user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   event_title VARCHAR(255) NOT NULL,
   event_date DATE NOT NULL,
   event_time TIME NOT NULL,
@@ -32,12 +32,12 @@ CREATE TABLE events (
   is_virtual boolean,
   donation_id INTEGER,
   mobilize_id INTEGER,
-  rsvp boolean
+  rsvp BOOLEAN DEFAULT false
 );
 
 CREATE TABLE news (
   news_id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(user_id),
+  user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   news_title VARCHAR(255) NOT NULL,
   donation_id INTEGER,
   news_content TEXT NOT NULL,
@@ -47,8 +47,8 @@ CREATE TABLE news (
 
 CREATE TABLE donations (
   donation_id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(user_id),
-  event_id INT REFERENCES events(event_id),
+  user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
+  event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
   donation_keyword VARCHAR(255) NOT NULL,
   donation_description TEXT NOT NULL
 );
