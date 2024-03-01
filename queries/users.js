@@ -55,5 +55,28 @@ const getUsers = async () => {
             return err;
         }
     }
+
+    const updateUser = async (userId, updatedUserData) => {
+        const { first_name, last_name, email } = updatedUserData;
     
-module.exports = {getUsers, createUser, logInUser}
+        try {
+            const updatedUser = await db.oneOrNone(
+                `UPDATE users
+                 SET
+                     first_name = $1,
+                     last_name = $2,
+                     email = $3
+                 WHERE
+                     user_id = $4
+                 RETURNING *`,
+                [first_name, last_name, email, userId]
+            );
+    
+            return updatedUser;
+        } catch (error) {
+            throw new Error(`Error updating user: ${error.message}`);
+        }
+    };
+    
+    
+module.exports = {getUsers, createUser, logInUser, updateUser}
