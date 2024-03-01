@@ -14,8 +14,6 @@ app.use('/users', usersController)
 app.get('/', (req, res) => {
     res.json({ index: "Welcome to Impactify" })
 })
-app.get('/login', (req, res) => {
-    res.json({ index: "login page" })
-})
+
 
 module.exports = app
