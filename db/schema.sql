@@ -49,6 +49,8 @@ CREATE TABLE donations (
   donation_id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
+  donation_amount NUMERIC, 
+  currency_code CHAR(3),
   donation_keyword VARCHAR(255) NOT NULL,
   donation_description TEXT NOT NULL
 );

@@ -57,7 +57,7 @@ const getUsers = async () => {
     }
 
     const updateUser = async (userId, updatedUserData) => {
-        const { first_name, last_name, email } = updatedUserData;
+        const { first_name, last_name, email, user_id } = updatedUserData;
     
         try {
             const updatedUser = await db.oneOrNone(
@@ -69,7 +69,7 @@ const getUsers = async () => {
                  WHERE
                      user_id = $4
                  RETURNING *`,
-                [first_name, last_name, email, userId]
+                [first_name, last_name, email, user_id]
             );
     
             return updatedUser;
