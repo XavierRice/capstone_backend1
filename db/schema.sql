@@ -10,13 +10,14 @@ CREATE TABLE users (
   last_name VARCHAR(255) NOT NULL,
   user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  events_created INT,
-  favorite_events INT,
-  favorite_news INT,
-  donations_made INT,
+  events_created INT DEFAULT 0,
+  favorite_events INT DEFAULT 0,
+  favorite_news INT DEFAULT 0,
+  donations_made INT DEFAULT 0,
   password_hash VARCHAR(255),
   user_keywords TEXT[]
 );
+
 
 CREATE TABLE events (
   event_id SERIAL PRIMARY KEY,

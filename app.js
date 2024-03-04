@@ -12,7 +12,11 @@ app.use(express.json())
 app.use('/users', usersController)
 app.use('/events', eventsController)
 app.use('/donations', donationsController)
+
+app.use('/register', usersController)
+
 app.use('/news', newsController)
+
 
 
 app.get('/', (req, res) => {
