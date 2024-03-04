@@ -16,7 +16,7 @@ users.get('/', async (req, res) => {
 });
 
 // POST new user
-users.post('/', async (req, res) => {
+users.post('/register', async (req, res) => {
     try {
         const newUser = await createUser(req.body);
         const token = jwt.sign({ userId: newUser.user_id, username: newUser.username }, secret);
@@ -26,6 +26,8 @@ users.post('/', async (req, res) => {
         res.status(500).json({ error: "Invalid Information", info: err.message });
     }
 });
+
+
 
 // PUT update user
 users.put('/:id', async (req, res) => {
