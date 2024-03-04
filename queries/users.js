@@ -11,30 +11,31 @@ const getUsers = async () => {
   };
 
 
-    const createUser = async(user) => {
-        try {
-            const { user_id, 
-                    first_name, 
-                    last_name, 
-                    user_name, 
-                    email, 
-                    events_created, 
-                    favorite_events, 
-                    favorite_news, 
-                    donations_made, 
-                    password_hash, 
-                    user_keywords } = user
-            const salt = 10;
-            const hash = await bcrypt.hash(password_hash, salt);
-            const newUser = await db.one(
-                "INSERT INTO users (first_name, last_name, user_name, email, events_created, favorite_events, favorite_news, donations_made, password_hash, user_keywords) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 ) RETURNING *", 
-                [first_name, last_name, user_name, email, events_created, favorite_events, favorite_news, donations_made, password_hash, user_keywords]
-            )
-            return newUser
-        } catch(error) {
-            return error
-        }
+  const createUser = async (user) => {
+    try {
+        const { 
+            first_name, 
+            last_name, 
+            user_name, 
+            email, 
+            password_hash, 
+            user_keywords 
+        } = user;
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password_hash, saltRounds);
+
+        const newUser = await db.one(
+            "INSERT INTO users (first_name, last_name, user_name, email, password_hash, user_keywords) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            [first_name, last_name, user_name, email, hashedPassword, user_keywords]
+        );
+
+        return newUser;
+    } catch (error) {
+        return error;
     }
+};
+
     const logInUser = async (user) => {
         try {
             const loggedInUser = await db.oneOrNone("SELECT * FROM users WHERE user_name=$1", user.user_name);
