@@ -43,7 +43,8 @@ CREATE TABLE news (
   donation_id INTEGER,
   news_content TEXT NOT NULL,
   news_url TEXT NOT NULL,
-  news_image TEXT NOT NULL
+  news_image TEXT NOT NULL,
+  Keywords VARCHAR(300) 
 );
 
 CREATE TABLE donations (

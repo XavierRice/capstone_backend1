@@ -11,9 +11,9 @@ const getEvents = async () => {
 
 
 
-const getEvent = async (eventId, userId) => {
+const getOneEvent = async (eventId) => {
     try {
-       const event = await db.one("SELECT * FROM events WHERE event_id=$1 AND user_id=$2", eventId, userId);
+       const event = await db.one("SELECT * FROM events WHERE event_id=$1", eventId);
        return event;
     } catch (err) {
         return err;
@@ -26,7 +26,6 @@ const getEvent = async (eventId, userId) => {
 const createEvent = async (event) => {
     try {
         const {  
-                user_id,
                 event_title,
                 event_date,
                 event_time,
@@ -40,8 +39,8 @@ const createEvent = async (event) => {
                 mobilize_id,
                 rsvp
                 } = event
-        const rsvpValue = rsvp !== undefined ? rsvp : false
-        const newEvent = await db.one("INSERT INTO events (user_id, event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *", [user_id, event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvpValue])
+        const rsvpValue = event.rsvp || false
+        const newEvent = await db.one("INSERT INTO events (event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *", [event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvpValue])
         return newEvent
     } catch (err) {
         return err
@@ -81,4 +80,4 @@ const deleteEvent = async (id) => {
 }
 
 
-module.exports = { getEvents, getEvent, createEvent, updateEvent, deleteEvent }
+module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent }
