@@ -1,11 +1,7 @@
-const express = require('express');
-require("dotenv").config()
-const stripeRoutes = express.Router()
-const Stripe = require('stripe')
-
 const stripeSecret = process.env.X_STRIPE_SECRET;
 const stripe = Stripe(stripeSecret);
 
+const testAccount = process.env.X_ACCOUNTNUMBER
 stripeRoutes.use(express.json());
 
 async function createStripeAccount(){
@@ -14,7 +10,7 @@ async function createStripeAccount(){
         const account = await stripe.accounts.create({
             country: 'US',
             type: 'custom',
-            email: 'user.email',
+            email: 'xavier.rice@gmail.com',
             capabilities: {
               card_payments: {
                 requested: true,
@@ -53,11 +49,10 @@ async function createStripeDonation(req, res) {
     }
 }
 
-async function createAccountSession( req, res){
- const { account_id } = req.body
+async function createAccountSession(req, res){
     try {
         const accountSession = await stripe.accountSessions.create({
-          account: account_id,
+          account: testAccount,
           components: {
             payments: {
               enabled: true,
@@ -69,10 +64,9 @@ async function createAccountSession( req, res){
             },
           }
         });
-    
-        res.json({
-          client_secret: accountSession.client_secret,
-        });
+
+          return accountSession.client_secret
+       
       } catch (error) {
         console.error('An error occurred when calling the Stripe API to create an account session', error);
         res.status(500);
@@ -80,6 +74,7 @@ async function createAccountSession( req, res){
       }
 
 }
+
 
 
 module.exports = { createStripeDonation, createStripeAccount, createAccountSession };
