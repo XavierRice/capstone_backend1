@@ -82,4 +82,4 @@ async function createAccountSession( req, res){
 }
 
 
-module.exports = { createStripeDonation, createStripeAccount };
+module.exports = { createStripeDonation, createStripeAccount, createAccountSession };

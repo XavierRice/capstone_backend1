@@ -2,7 +2,7 @@ const express = require('express');
 require("dotenv").config()
 const donations = express.Router()
 const { getDonations, createDonations } = require('../queries/donations');
-const { createStripeDonation} = ('../queries/stripeQueries')
+const { createStripeDonation, createStripeAccount, createAccountSession} = ('../queries/stripeQueries')
 
 donations.get('/', async (req, res) => {
     try {
