@@ -2,10 +2,10 @@ const express = require('express');
 require("dotenv").config();
 const stripeRoutes = express.Router();
 const Stripe = require('stripe');
-const { createStripeDonation, createStripeAccount, createAccountSession} = ('../queries/stripe')
+const { createStripeDonation, createStripeAccount, createAccountSession} = require('../queries/stripe')
 
 //creating user account session
-stripeRoutes.get('/', async (req, res) => {
+stripeRoutes.post('/', async (req, res) => {
     
     try {
         const clientSecret= await createAccountSession(); 
@@ -15,3 +15,4 @@ stripeRoutes.get('/', async (req, res) => {
     }
 });
 
+module.exports = stripeRoutes

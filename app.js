@@ -5,7 +5,7 @@ const usersController = require('./controllers/usersController')
 const eventsController = require('./controllers/eventsController')
 const donationsController = require('./controllers/donationsController')
 const newsController = require('./controllers/newsController')
-const stripeContoller = require('./controllers/stripeController')
+const stripeController = require('./controllers/stripeController')
 
 // Middleware
 app.use(cors())
@@ -18,7 +18,7 @@ app.use('/register', usersController)
 
 app.use('/news', newsController)
 
-app.use('/payment', stripeContoller)
+app.use('/payments', stripeController)
 
 
 app.get('/', (req, res) => {

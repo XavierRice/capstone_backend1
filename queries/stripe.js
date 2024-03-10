@@ -1,8 +1,9 @@
 const stripeSecret = process.env.X_STRIPE_SECRET;
+const Stripe = require('stripe')
 const stripe = Stripe(stripeSecret);
 
 const testAccount = process.env.X_ACCOUNTNUMBER
-stripeRoutes.use(express.json());
+
 
 async function createStripeAccount(){
     const { user_email } = req.body
