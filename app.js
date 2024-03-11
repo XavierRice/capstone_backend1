@@ -22,7 +22,7 @@ app.use('/payments', stripeController)
 
 
 app.get('/', (req, res) => {
-    res.json({ index: "Welcome to Impactify" })
+    res.send( 'Welcome to Impactify')
 })
 
 
