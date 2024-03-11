@@ -86,6 +86,14 @@ const getUsers = async () => {
             throw new Error(`Error updating user: ${error.message}`);
         }
     };
+    const deleteUser = async (id) => {
+        try {
+            const deletedUser = await db.one("DELETE FROM users WHERE user_id=$1 RETURNING *", id)
+            return deletedUser
+        } catch (err) {
+            return err
+        }
+    }
     
     
-module.exports = {getUsers, getOneUser, createUser, logInUser, updateUser}
+module.exports = {getUsers, getOneUser, createUser, logInUser, updateUser, deleteUser}

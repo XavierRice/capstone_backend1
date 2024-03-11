@@ -1,10 +1,10 @@
 \c impactify_app
 
-INSERT INTO users (first_name, last_name, user_name, email, events_created, favorite_events, favorite_news, donations_made, password_hash, user_keywords)
+INSERT INTO users (first_name, last_name, user_name, email, password_hash, user_keywords)
 VALUES
-  ('John', 'Doe', 'johndoe', 'johnnydoe@gmail.com', 5, 10, 8, 3, 'password123', '{"activism", "politics", "social justice"}'),
-  ('Jane', 'Smith', 'janesmith', 'janiesmithhh@gmail.com', 3, 7, 5, 2, 'password456', '{"community", "equality", "environment"}'),
-  ('Alice', 'Johnson', 'alicej', 'allicee@gmail.com', 8, 12, 15, 5, 'password789', '{"human rights", "climate change", "volunteer"}');
+  ('John', 'Doe', 'johndoe', 'johnnydoe@gmail.com','password123', '{"activism", "politics", "social justice"}'),
+  ('Jane', 'Smith', 'janesmith', 'janiesmithhh@gmail.com', 'password456', '{"community", "equality", "environment"}'),
+  ('Alice', 'Johnson', 'alicej', 'allicee@gmail.com', 'password789', '{"human rights", "climate change", "volunteer"}');
 
 -- events should have some related keywords
 INSERT INTO events (user_id, event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvp)
