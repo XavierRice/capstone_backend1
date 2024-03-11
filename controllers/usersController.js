@@ -3,7 +3,7 @@ const users = express.Router();
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
-const { getUsers, createUser, logInUser, updateUser } = require('../queries/users');
+const {getUsers, getOneUser, createUser, logInUser, updateUser} = require('../queries/users');
 
 // GET users
 users.get('/', async (req, res) => {
@@ -14,6 +14,16 @@ users.get('/', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+// get one user
+users.get('/:id', async (req, res) => {
+    try {
+        const {id } = req.params
+        const user = await getOneUser(id)
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(404).json({ error: err })
+    }
+})
 
 // POST new user
 users.post('/register', async (req, res) => {

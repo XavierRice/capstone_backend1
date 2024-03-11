@@ -1,8 +1,8 @@
 const db = require('../db/dbConfig')
 
-const getEvents = async () => {
+const getEvents = async (userId) => {
     try {
-       const events = await db.any("SELECT * FROM events")
+       const events = await db.any("SELECT * FROM events WHERE user_id=$1", userId)
        return events
     } catch (err) {
         return err
