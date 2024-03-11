@@ -1,7 +1,8 @@
 const express = require('express');
 require("dotenv").config()
 const events = express.Router()
-const { getEvents, 
+const { getEvents,
+        getOneEvent, 
         createEvent,
         updateEvent,
         deleteEvent } = require('../queries/events')
@@ -22,13 +23,13 @@ events.get('/', async (req, res) => {
         
 
 // get one event
-events.get('/:id', async (req, res) => {
-    try {
-        const { id, user_id } = req.params
-        const event = await getEvents( id, user_id )
-        res.status(200).json(event)
-    } catch (err) {
-        res.status(404).json({ error: err })
+events.get("/:id", async (req, res) => {
+    const id = req.params.id
+    const oneEvent = await getOneEvent(id)
+    if(oneEvent){
+    res.status(200).json(oneEvent)
+    } else {
+        res.status(500).json({error: "Event Not found"})
     }
 })
 

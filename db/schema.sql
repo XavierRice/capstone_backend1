@@ -27,24 +27,24 @@ CREATE TABLE events (
   event_time TIME NOT NULL,
   lat NUMERIC (6, 4),
   lng NUMERIC (6, 4),
+  event_keywords TEXT[],
   event_location VARCHAR(255) NOT NULL,
   event_details VARCHAR(1000) NOT NULL,
   event_photo TEXT NOT NULL,
   is_virtual boolean,
-  donation_id INTEGER,
-  mobilize_id INTEGER,
-  rsvp BOOLEAN DEFAULT false
+  accept_donation boolean,
+  rsvp BOOLEAN DEFAULT false,
+  stripe_id VARCHAR(225)
 );
 
 CREATE TABLE news (
   news_id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   news_title VARCHAR(255) NOT NULL,
   donation_id INTEGER,
   news_content TEXT NOT NULL,
   news_url TEXT NOT NULL,
   news_image TEXT NOT NULL,
-  Keywords TEXT NOT NULL
+  news_keywords TEXT[] 
 );
 
 CREATE TABLE donations (
