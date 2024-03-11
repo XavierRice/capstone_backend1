@@ -76,6 +76,6 @@ async function createAccountSession(req, res){
 
 }
 
-console.log(createStripeAccount())
+//console.log(createStripeAccount())
 
 module.exports = { createStripeDonation, createStripeAccount, createAccountSession };
