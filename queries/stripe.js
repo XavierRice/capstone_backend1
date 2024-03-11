@@ -6,7 +6,7 @@ const testAccount = process.env.X_ACCOUNTNUMBER
 
 
 async function createStripeAccount(){
-    const { user_email } = req.body
+   // const { user_email } = req.body
     try {
         const account = await stripe.accounts.create({
             country: 'US',
@@ -22,8 +22,8 @@ async function createStripeAccount(){
             },
           });
           console.log(`Stripe Account Created: ${account?.id}` )
-        
-          const stripe_donation = { id: account.id, }
+          const stripe_acc_mini = { id: account.id, }
+          return stripe_acc_mini
     } catch (error){
         console.error('Error creating Stripe Account', error.message)
     }
@@ -76,6 +76,6 @@ async function createAccountSession(req, res){
 
 }
 
-
+console.log(createStripeAccount())
 
 module.exports = { createStripeDonation, createStripeAccount, createAccountSession };
