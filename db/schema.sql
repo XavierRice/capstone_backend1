@@ -17,7 +17,7 @@ CREATE TABLE users (
   password_hash VARCHAR(255),
   user_keywords TEXT[]
 );
-
+ 
 
 CREATE TABLE events (
   event_id SERIAL PRIMARY KEY,
@@ -44,7 +44,7 @@ CREATE TABLE news (
   news_content TEXT NOT NULL,
   news_url TEXT NOT NULL,
   news_image TEXT NOT NULL,
-  Keywords VARCHAR(300) 
+  Keywords TEXT NOT NULL
 );
 
 CREATE TABLE donations (
@@ -53,7 +53,6 @@ CREATE TABLE donations (
   event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
   donation_amount NUMERIC, 
   currency_code CHAR(3),
-  donation_keyword VARCHAR(255) NOT NULL,
   donation_description TEXT NOT NULL
 );
 

@@ -9,6 +9,14 @@ const getUsers = async () => {
       return err;
     }
   };
+  const getOneUser = async (id) => {
+    try {
+        const oneUser = await db.one("SELECT * FROM users WHERE user_id=$1", id);
+        return oneUser;
+    } catch (err) {
+        return err;
+    }
+}
 
 
   const createUser = async (user) => {
@@ -80,4 +88,4 @@ const getUsers = async () => {
     };
     
     
-module.exports = {getUsers, createUser, logInUser, updateUser}
+module.exports = {getUsers, getOneUser, createUser, logInUser, updateUser}
