@@ -10,7 +10,7 @@ const getEvents = async () => {
 }
 
 
-
+//get one event
 const getOneEvent = async (eventId) => {
     try {
        const event = await db.one("SELECT * FROM events WHERE event_id=$1", eventId);
