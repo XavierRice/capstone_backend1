@@ -1,7 +1,8 @@
 const express = require('express');
 require("dotenv").config()
 const donations = express.Router()
-const { getDonations, createDonations } = require('../queries/donations')
+const { getDonations, createDonations } = require('../queries/donations');
+
 
 donations.get('/', async (req, res) => {
     try {
