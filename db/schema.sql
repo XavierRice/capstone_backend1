@@ -10,10 +10,6 @@ CREATE TABLE users (
   last_name VARCHAR(255) NOT NULL,
   user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
-  events_created INT DEFAULT 0,
-  favorite_events INT DEFAULT 0,
-  favorite_news INT DEFAULT 0,
-  donations_made INT DEFAULT 0,
   password_hash VARCHAR(255),
   user_keywords TEXT[]
 );
@@ -53,7 +49,6 @@ CREATE TABLE donations (
   event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
   donation_amount NUMERIC, 
   currency_code CHAR(3),
-  donation_keyword VARCHAR(255) NOT NULL,
   donation_description TEXT NOT NULL
 );
 

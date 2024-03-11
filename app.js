@@ -20,7 +20,7 @@ app.use('/news', newsController)
 
 
 app.get('/', (req, res) => {
-    res.json({ index: "Welcome to Impactify" })
+    res.send( 'Welcome to Impactify')
 })
 
 
