@@ -10,7 +10,7 @@ const getEvents = async () => {
 }
 
 
-
+//get one event!!
 const getOneEvent = async (eventId) => {
     try {
        const event = await db.one("SELECT * FROM events WHERE event_id=$1", eventId);
@@ -31,16 +31,17 @@ const createEvent = async (event) => {
                 event_time,
                 lat,
                 lng,
+                event_keywords,
                 event_location,
                 event_details,
                 event_photo,
                 is_virtual,
-                donation_id,
-                mobilize_id,
-                rsvp
+                accept_donation,
+                rsvp,
+                stripe_id
                 } = event
         const rsvpValue = event.rsvp || false
-        const newEvent = await db.one("INSERT INTO events (event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *", [event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, rsvpValue])
+        const newEvent = await db.one("INSERT INTO events (event_title, event_date, event_time, lat, lng, event_keywords, event_location, event_details, event_photo, is_virtual, accept_donation, rsvp, stripe_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *", [event_title, event_date, event_time, lat, lng, event_keywords, event_location, event_details, event_photo, is_virtual, accept_donation, rsvp, stripe_id])
         return newEvent
     } catch (err) {
         return err
@@ -56,14 +57,15 @@ const updateEvent = async (id, event) => {
                 event_time,
                 lat,
                 lng,
+                event_keywords,
                 event_location,
                 event_details,
                 event_photo,
                 is_virtual,
-                donation_id,
-                mobilize_id
+                accept_donation,
+                stripe_id
                 } = event
-        const updatedEvent = await db.one("UPDATE events SET user_id=$1, event_title=$2, event_date=$3, event_time=$4, lat=$5, lng=$6, event_location=$7, event_details=$8, event_photo=$9, is_virtual=$10, donation_id=$11, mobilize_id=$12 RETURNING *", [user_id, event_title, event_date, event_time, lat, lng, event_location, event_details, event_photo, is_virtual, donation_id, mobilize_id, id])
+        const updatedEvent = await db.one("UPDATE events SET user_id=$1, event_title=$2, event_date=$3, event_time=$4, lat=$5, lng=$6, event_keywords=$7, event_location=$8, event_details=$9, event_photo=$10, is_virtual=$11, accept_donation=$12, stripe_id=$13 RETURNING *", [user_id, event_title, event_date, event_time, lat, lng, event_keywords, event_location, event_details, event_photo, is_virtual, accept_donation, stripe_id, id])
         return updatedEvent
     } catch (err) {
         return err

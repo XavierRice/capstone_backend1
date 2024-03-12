@@ -3,7 +3,7 @@ const users = express.Router();
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
-const { getUsers, createUser, logInUser, updateUser } = require('../queries/users');
+const {getUsers, getOneUser, createUser, logInUser, updateUser, deleteUser} = require('../queries/users');
 
 // GET users
 users.get('/', async (req, res) => {
@@ -14,6 +14,16 @@ users.get('/', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+// get one user
+users.get('/:id', async (req, res) => {
+    try {
+        const {id } = req.params
+        const user = await getOneUser(id)
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(404).json({ error: err })
+    }
+})
 
 // POST new user
 users.post('/register', async (req, res) => {
@@ -63,5 +73,15 @@ users.post('/login', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+users.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params
+        const deletedUser = await deleteUser(id)
+        res.status(200).json({ message: "Successfully deleted user" })
+    } catch (err) {
+        res.status(404).json({ error: err })
+    }
+})
 
 module.exports = users;
