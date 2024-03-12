@@ -1,8 +1,24 @@
+const express = require('express')
 const stripeSecret = process.env.X_STRIPE_SECRET;
 const Stripe = require('stripe')
 const stripe = Stripe(stripeSecret);
 
 const testAccount = process.env.X_ACCOUNTNUMBER
+
+async function createAccountLink(){
+
+  try {
+    const accountLink = await stripe.accountLinks.create({
+      account: testAccount,
+      refresh_url: 'https:localhost:5174/discover/donations',
+      return_url: 'https:localhost:5174/discover',
+      type: 'account_onboarding',
+    })
+    return accountLink
+  }catch{
+    console.error('Error creating account link')
+  }
+}
 
 
 async function createStripeAccount(){
@@ -76,6 +92,14 @@ async function createAccountSession(req, res){
 
 }
 
+
+
+
+
+
+
+
+
 //console.log(createStripeAccount())
 
-module.exports = { createStripeDonation, createStripeAccount, createAccountSession };
+module.exports = { createStripeDonation, createStripeAccount, createAccountSession, createAccountLink };
