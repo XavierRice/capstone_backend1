@@ -10,13 +10,15 @@ async function createAccountLink(){
   try {
     const accountLink = await stripe.accountLinks.create({
       account: testAccount,
-      refresh_url: 'https:localhost:5174/discover/donations',
-      return_url: 'https:localhost:5174/discover',
+      refresh_url: 'http:localhost:5174/discover/donations',
+      return_url: 'http:localhost:5174/discover',
       type: 'account_onboarding',
     })
-    return accountLink
+    console.log(accountLink)
+   return accountLink
   }catch{
-    console.error('Error creating account link')
+    console.error('Error creating account link', error)
+    throw error;
   }
 }
 

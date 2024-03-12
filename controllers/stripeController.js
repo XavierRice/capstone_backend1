@@ -20,7 +20,7 @@ stripeRoutes.post('/', async (req, res) => {
 
     try {
         const stripeAccLink = await createAccountLink()
-        res.status(200).json(stripeAccLink);
+        res.status(200).json({client_secret: stripeAccLink});
     } catch (err){
         res.status(500).json({ error: "Internal Server Error" });
     }
