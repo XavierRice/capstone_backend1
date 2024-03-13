@@ -19,12 +19,12 @@ const { createAccountLink} = require('../queries/stripe')
 
 
 
-stripeRoutes.post('/', async (req, res) => {
+stripeRoutes.post('/v1/account_links', async (req, res) => {
 
     try {
-        const url = await createAccountLink()
-        console.log(url)
-        res.status(201).json({success:true, url:url});
+        const accountLink = await createAccountLink()
+        console.log(`This should be the account: ${accountLink}`)
+        res.status(201).redirect(accountLink.url)
     } catch (err){
         console.error(err)
         res.status(400).json({ success:false, err });

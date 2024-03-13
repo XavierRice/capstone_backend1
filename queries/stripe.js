@@ -9,7 +9,7 @@ async function createAccountLink(){
 
   try {
     const account = await stripe.accounts.create({
-      type:'custom',
+      type:'standard',
       country: 'US',
       capabilities: {
         card_payments: {
@@ -29,8 +29,8 @@ async function createAccountLink(){
       type: 'account_onboarding',
     })
     const { url } = AccountLinks
-    console.log(url)
-    return url
+    console.log(AccountLinks)
+    return AccountLinks
   }catch(error){
     console.error('Error creating account link', error)
     throw error;
