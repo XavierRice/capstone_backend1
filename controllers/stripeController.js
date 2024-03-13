@@ -2,7 +2,7 @@ const express = require('express');
 require("dotenv").config();
 const stripeRoutes = express.Router();
 const Stripe = require('stripe');
-const { createStripeDonation, createStripeAccount, createAccountSession , createAccountLink} = require('../queries/stripe')
+const { createAccountLink} = require('../queries/stripe')
 
 //creating user account session
 // stripeRoutes.post('/', async (req, res) => {
@@ -16,14 +16,20 @@ const { createStripeDonation, createStripeAccount, createAccountSession , create
 //     }
 // });
 
+
+
+
 stripeRoutes.post('/', async (req, res) => {
 
     try {
-        const stripeAccLink = await createAccountLink()
-        res.status(200).json({client_secret: stripeAccLink});
+        const url = await createAccountLink()
+        console.log(url)
+        res.status(201).json({success:true, url:url});
     } catch (err){
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error(err)
+        res.status(400).json({ success:false, err });
     }
 })
+
 
 module.exports = stripeRoutes
