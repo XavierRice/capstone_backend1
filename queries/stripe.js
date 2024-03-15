@@ -21,7 +21,8 @@ async function createAccountLink(){
       },
       //this is where we could fill users data preonboarding. 
     });
-
+    console.log(`This is the users new account ${account}`)
+    
     const AccountLinks = await stripe.accountLinks.create({
       account: account.id,
       refresh_url: `${process.env.BACKEND_URL}/verify-wallet?account_id=${account.id}`,

@@ -11,12 +11,14 @@ const { stripeWebhook } = require('./stripeWebhooks');
 const stripeRoutes = express.Router();
 
 
-stripeRoutes.post('/v1/account_links', async (req, res) => {
+stripeRoutes.post('/v1/accounts', async (req, res) => {
 
     try {
         const accountLink = await createAccountLink()
+
         console.log(`Account Link: ${accountLink.url}`)
         res.status(201).json({success:true, url:accountLink.url})
+
     } catch (err){
         console.error(err)
         res.status(400).json({ success:false, error: err.message });

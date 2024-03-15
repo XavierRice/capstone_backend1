@@ -66,7 +66,7 @@ const getUsers = async () => {
     }
 
     const updateUser = async (userId, updatedUserData) => {
-        const { first_name, last_name, email, user_id } = updatedUserData;
+        const { first_name, last_name, user_name, email, user_id } = updatedUserData;
     
         try {
             const updatedUser = await db.oneOrNone(
@@ -74,11 +74,12 @@ const getUsers = async () => {
                  SET
                      first_name = $1,
                      last_name = $2,
-                     email = $3
+                     user_name = $3,
+                     email = $4
                  WHERE
-                     user_id = $4
+                     user_id = $5
                  RETURNING *`,
-                [first_name, last_name, email, user_id]
+                [first_name, last_name, user_name, email, user_id]
             );
     
             return updatedUser;
@@ -86,6 +87,7 @@ const getUsers = async () => {
             throw new Error(`Error updating user: ${error.message}`);
         }
     };
+    
     const deleteUser = async (id) => {
         try {
             const deletedUser = await db.one("DELETE FROM users WHERE user_id=$1 RETURNING *", id)
