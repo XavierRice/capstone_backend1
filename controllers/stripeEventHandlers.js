@@ -12,7 +12,7 @@ async function checkAccountStatus(accountId) {
     }
 }
 
-async function processPaymentIntentSuccess(paymentIntent) {
+async function processPaymentIntentSuccess(connnectAccountId, paymentIntent) {
     const { event_id, user_id, account_id } = paymentIntent.metadata;
     
     const canReceivePayments = await checkAccountStatus(account_id);

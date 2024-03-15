@@ -19,7 +19,7 @@ const stripeWebhook = async (req, res) => {
     switch (event.type) {
       case "account.updated":
         const accountStatus = event.data.object;
-        await checkAccountStatus(accountUpdated);
+        await checkAccountStatus(accountStatus);
         break;
 
       case "account.external_account.created":
@@ -38,9 +38,10 @@ const stripeWebhook = async (req, res) => {
         break;
 
       case "payment_intent.succeeded":
-        const paymentIntentSucceeded = event.data.object;
+        const paymentIntent= event.data.object;
+        const connnectAccountId = event.account;
 
-        await processPaymentIntentSuccess(paymentIntentSucceeded);
+        await processPaymentIntentSuccess( connnectAccountId, paymentIntent);
         break;
 
       case "payment_link.created":
