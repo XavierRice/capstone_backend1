@@ -19,7 +19,7 @@ const stripeWebhook = async (req, res) => {
     switch (event.type) {
       case "account.updated":
         const accountStatus = event.data.object;
-        await checkAccountStatus(accountStatus);
+        await checkAccountStatus(accountStatus );
         break;
 
       case "account.external_account.created":
