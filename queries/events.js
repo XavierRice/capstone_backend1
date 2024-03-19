@@ -20,9 +20,6 @@ const getOneEvent = async (eventId) => {
     }
 }
 
-
-
-
 const createEvent = async (event) => {
     try {
         const {  
@@ -82,4 +79,5 @@ const deleteEvent = async (id) => {
 }
 
 
-module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent }
+
+module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent}

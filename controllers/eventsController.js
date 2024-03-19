@@ -5,13 +5,11 @@ const { getEvents,
         getOneEvent, 
         createEvent,
         updateEvent,
-        deleteEvent } = require('../queries/events')
+        deleteEvent,
+        } = require('../queries/events')
 
 
-
-
-
-events.get('/', async (req, res) => {
+        events.get('/', async (req, res) => {
     try {
         const { user_id } = req.params
         const events = await getEvents(user_id)
@@ -60,7 +58,8 @@ events.delete("/:id", async (req, res) => {
     } catch (err) {
         res.status(404).json({ error: err })
     }
-})
+});
+
 
 
 module.exports = events
