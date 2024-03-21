@@ -6,10 +6,11 @@ const { getEvents,
         createEvent,
         updateEvent,
         deleteEvent,
+        searchEventsByKeyword
         } = require('../queries/events')
 
 
-        events.get('/', async (req, res) => {
+events.get('/', async (req, res) => {
     try {
         const { user_id } = req.params
         const events = await getEvents(user_id)
@@ -18,6 +19,16 @@ const { getEvents,
             res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
+events.get('/search', async (req, res) => {
+    try {
+        const keyword = req.query.keyword; 
+        const events = await searchEventsByKeyword(keyword); 
+        res.status(200).json({ data: events });
+    } catch (error) {
+        res.status(500).json({ error: events });
+    }
+});
         
 
 // get one event
@@ -50,6 +61,9 @@ events.put('/:id', async (req, res) => {
     }
 })
 
+
+
+
 events.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -59,7 +73,6 @@ events.delete("/:id", async (req, res) => {
         res.status(404).json({ error: err })
     }
 });
-
 
 
 module.exports = events

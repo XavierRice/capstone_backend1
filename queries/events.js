@@ -80,4 +80,25 @@ const deleteEvent = async (id) => {
 
 
 
-module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent}
+
+
+const searchEventsByKeyword = async (keyword) => {
+    try {
+        const formattedKeyword = `%${keyword}%`;
+        const events = await db.any(
+            "SELECT * FROM events WHERE EXISTS (SELECT 1 FROM unnest(event_keywords) AS keyword WHERE LOWER(keyword) LIKE LOWER($1))",
+            [formattedKeyword]
+        );
+        // console.log(events, formattedKeyword);
+        return events;
+    } catch (err) {
+        return err;
+    }
+};
+
+
+
+
+
+
+module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent, searchEventsByKeyword}

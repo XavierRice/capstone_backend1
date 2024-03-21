@@ -42,7 +42,7 @@ users.post("/register", async (req, res) => {
     );
     res.status(201).json({ user: newUser, token });
   } catch (err) {
-    res.status(500).json({ error: "Invalid Information", info: err });
+    res.status(500).json({ error: "Invalid Information", info: err.message });
   }
 });
 
@@ -72,7 +72,7 @@ users.post("/login", async (req, res) => {
     res.status(200).json({
       user: {
         user_id: user.user_id,
-        username: user.user_name,
+        username: user.username,
         email: user.email,
       },
       token,
