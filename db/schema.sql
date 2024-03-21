@@ -52,5 +52,3 @@ CREATE TABLE donations (
   donation_description TEXT NOT NULL
 );
 
--- CREATE INDEX event_keywords_idx ON events USING gin(event_keywords gin_trgm_ops);
--- CREATE INDEX news_keywords_idx ON news USING gin(news_keywords gin_trgm_ops);
