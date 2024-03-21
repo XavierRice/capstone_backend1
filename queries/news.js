@@ -35,7 +35,18 @@ const createNews = async (news) => {
     }
 }
 
+const searchNewsByKeyword = async (keyword) => {
+    try {
+        const formattedKeyword = `%${keyword}%`;
+        const news = await db.any(
+            "SELECT * FROM news WHERE EXISTS (SELECT 1 FROM unnest(news_keywords) AS keyword WHERE LOWER(keyword) LIKE LOWER($1))",
+            [formattedKeyword]
+        );
+        return news;
+    } catch (err) {
+        return err;
+    }
+};
 
 
-
-module.exports = { getNews, getOneArticle, createNews }
+module.exports = { getNews, getOneArticle, createNews, searchNewsByKeyword }
