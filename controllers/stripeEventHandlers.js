@@ -1,4 +1,4 @@
-// stripeEventHandlers.js
+
 const stripe = require("stripe")(process.env.X_STRIPE_SECRET);
 const { recordDonation } = require('../queries/donations'); 
 
