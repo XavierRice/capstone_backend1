@@ -51,7 +51,7 @@ events.put('/:id', async (req, res) => {
         res.status(404).json({ error: err })
     }
 })
-
+//
 events.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params
