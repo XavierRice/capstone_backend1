@@ -61,9 +61,6 @@ events.put('/:id', async (req, res) => {
     }
 })
 
-
-
-
 events.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params

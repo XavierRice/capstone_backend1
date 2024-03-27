@@ -64,23 +64,34 @@ users.post("/login", async (req, res) => {
       return;
     }
 
+
+        res.status(200).json({
+            user: {
+                user_id: user.user_id,
+                username: user.user_name,
+                email: user.email,
+            },
+            token
+        })
+
     const token = jwt.sign(
       { userId: user.user_id, username: user.user_name },
       secret
     );
+// >>>>>>> dev_branch
 
-    res.status(200).json({
-      user: {
-        user_id: user.user_id,
-        username: user.username,
-        email: user.email,
-      },
-      token,
-    });
-  } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+//     res.status(200).json({
+//       user: {
+//         user_id: user.user_id,
+//         username: user.username,
+//         email: user.email,
+//       },
+//       token,
+//     });
+//   } catch (err) {
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 users.delete("/:id", async (req, res) => {
   try {

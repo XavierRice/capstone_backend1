@@ -1,11 +1,11 @@
 const db = require('../db/dbConfig');
 
 const createDonations = async (donationData) => {
-    const { user_id, event_id, donation_amount, currency_code, donation_keyword, donation_description } = donationData;
+    const { user_id, event_id, donation_amount, stripe_button, donation_keyword, donation_description } = donationData;
     try {
         const newDonation = await db.one(
-            'INSERT INTO donations (user_id, event_id, donation_amount, currency_code, donation_keyword, donation_description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [user_id, event_id, donation_amount, currency_code, donation_keyword, donation_description]
+            'INSERT INTO donations (user_id, event_id, donation_amount, stripe_button, donation_keyword, donation_description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [user_id, event_id, donation_amount, stripe_button, donation_keyword, donation_description]
         );
         return newDonation;
     } catch (error) {
