@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const news = express.Router();
-const { getNews, getOneArticle, createNews } = require("../queries/news");
+const { getNews, getOneArticle, createNews, searchNewsByKeyword } = require("../queries/news");
 
 news.get("/", async (req, res) => {
   try {
@@ -13,6 +13,15 @@ news.get("/", async (req, res) => {
   }
 });
 
+news.get('/search', async (req, res) => {
+  try {
+      const keyword = req.query.keyword; 
+      const events = await searchNewsByKeyword(keyword); 
+      res.status(200).json({ data: events }); 
+  } catch (error) {
+      res.status(500).json({ error: events }); 
+  }
+});
 
 news.get("/:id", async (req, res) => {
   try {

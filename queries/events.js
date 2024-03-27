@@ -1,8 +1,8 @@
 const db = require('../db/dbConfig')
 
-const getEvents = async (userId) => {
+const getEvents = async () => {
     try {
-       const events = await db.any("SELECT * FROM events WHERE user_id=$1", userId)
+       const events = await db.any("SELECT * FROM events")
        return events
     } catch (err) {
         return err
@@ -10,7 +10,7 @@ const getEvents = async (userId) => {
 }
 
 
-
+//get one event!!
 const getOneEvent = async (eventId) => {
     try {
        const event = await db.one("SELECT * FROM events WHERE event_id=$1", eventId);
@@ -19,9 +19,6 @@ const getOneEvent = async (eventId) => {
         return err;
     }
 }
-
-
-
 
 const createEvent = async (event) => {
     try {
@@ -82,4 +79,26 @@ const deleteEvent = async (id) => {
 }
 
 
-module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent }
+
+
+
+const searchEventsByKeyword = async (keyword) => {
+    try {
+        const formattedKeyword = `%${keyword}%`;
+        const events = await db.any(
+            "SELECT * FROM events WHERE EXISTS (SELECT 1 FROM unnest(event_keywords) AS keyword WHERE LOWER(keyword) LIKE LOWER($1))",
+            [formattedKeyword]
+        );
+        // console.log(events, formattedKeyword);
+        return events;
+    } catch (err) {
+        return err;
+    }
+};
+
+
+
+
+
+
+module.exports = { getEvents, getOneEvent, createEvent, updateEvent, deleteEvent, searchEventsByKeyword}
