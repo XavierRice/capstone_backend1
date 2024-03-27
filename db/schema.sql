@@ -48,7 +48,7 @@ CREATE TABLE donations (
   user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   event_id INT REFERENCES events(event_id) ON DELETE CASCADE,
   donation_amount NUMERIC, 
-  currency_code CHAR(3),
+  stripe_button VARCHAR(255) NOT NULL,
   donation_description TEXT NOT NULL
 );
 

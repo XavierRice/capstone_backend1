@@ -64,10 +64,21 @@ users.post("/login", async (req, res) => {
       return;
     }
 
+
+        // res.status(200).json({
+        //     user: {
+        //         user_id: user.user_id,
+        //         username: user.user_name,
+        //         email: user.email,
+        //     },
+        //     token
+        // })
+
     const token = jwt.sign(
       { userId: user.user_id, username: user.user_name },
       secret
     );
+
 
     res.status(200).json({
       user: {
@@ -79,7 +90,7 @@ users.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });
-  }
+ }
 });
 
 users.delete("/:id", async (req, res) => {

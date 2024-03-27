@@ -15,11 +15,11 @@ VALUES
 (3, 'D.C TRIP', '2024-04-30', '10:00:00', 40.7548, -73.9999, ARRAY['Activism', 'Voting rights', 'Civic engagement', 'Democracy', 'Election', 'Community involvement', 'Political participation', 'Voter education', 'Get out the vote', 'Citizenship', 'Civil rights', 'Activism', 'Political awareness', 'Empowerment'], '50 Hudson Yards, New York', 'Join me! A few of my classmates are going to the March in DC and getting a bus from Hudson Yards! Please come or help if you can!.', 'https://media.newyorker.com/photos/59097d74019dfc3494ea3ad1/4:3/w_480%2Cc_limit/Tolentino-TheSomehowControversialWomensMarchonWashington.jpg', true, false, true, 'buy_btn_1OwtDhLWqFEj0NCYkLk7z2Lh');
 
 
-INSERT INTO donations (user_id, event_id, donation_amount, currency_code, donation_description)
+INSERT INTO donations (user_id, event_id, donation_amount, stripe_button, donation_description)
 VALUES
-(1, 1, 3, 'USD', 'Support efforts to combat climate change and promote sustainability.'),
-(2, 2, 50, 'EUR', 'Contribute to initiatives working towards achieving racial equality and social justice.'),
-(3, 3, 100, 'USD', 'Help fund programs aimed at providing affordable housing for low-income families.');
+(1, 1, 3, 'buy_btn_1OwwxjLWqFEj0NCYJm94ESvx', 'Support efforts to combat climate change and promote sustainability.'),
+(2, 2, 50, 'buy_btn_1OwwxjLWqFEj0NCYJm94ESvx', 'Contribute to initiatives working towards achieving racial equality and social justice.'),
+(3, 3, 100, 'buy_btn_1OwwxjLWqFEj0NCYJm94ESvx', 'Help fund programs aimed at providing affordable housing for low-income families.');
 
 
 
